@@ -1,0 +1,521 @@
+/* ==========================================================================
+   PORTIFOLIO-NEURON THEME (Completo, Carrossel Corrigido)
+   ========================================================================== */
+
+/* --- Importação de Fontes --- */
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100");
+
+/* --- Configurações Globais --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #101010;
+    color: white;
+    font-family: 'Quantico', sans-serif;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #0d0d0d, #000);
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    display: none;
+}
+
+/* --- Estrutura de Seção Genérica --- */
+section {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    padding: 5rem 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* overflow: hidden; <-- CORRIGIDO! Esta linha foi removida. */
+}
+
+/* ==========================================================================
+   SEÇÃO HERO (Para T07 - Inicio.jsx)
+   ========================================================================== */
+.hero-section {
+    position: relative;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem; 
+}
+
+.hero-text {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+    width: 100%;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 4rem;
+    margin: 0 0 20px;
+    font-family: "Audiowide", sans-serif;
+    font-weight: 400;
+    color: white;
+    text-shadow: 2px 4px 10px rgba(0, 0, 0, 1);
+}
+
+.hero-text h2 {
+    color: azure;
+    font-size: 2rem;
+    margin-bottom: 0; 
+    font-family: "Quantico", sans-serif;
+    font-weight: 400;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* ==========================================================================
+   EFEITO GLITCH (Para T08 - SenacGlitch.jsx)
+   ========================================================================== */
+.glitch-section {
+    padding: 5rem 0 0 0;
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: 
+        linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, #111 2px, #111 4px);
+    position: relative;
+    z-index: 1;
+}
+
+.glitch {
+    /* ... (código do glitch sem alterações) ... */
+    position: relative;
+    color: #fff;
+    font-size: 3.5em;
+    font-weight: 100;
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 0.6em;
+    text-transform: uppercase;
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.3),
+        0 0 20px rgba(255, 0, 255, 0.2);
+    animation: 
+        glitch-flicker 3s infinite steps(1),
+        glitch-skew 4s infinite ease-in-out alternate-reverse;
+}
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: inherit;
+    overflow: hidden;
+}
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00c1;
+    clip-path: inset(30% 0 50% 0);
+    animation: 
+        glitch-rgb-1 0.8s infinite linear alternate-reverse,
+        glitch-noise 2s infinite steps(8);
+}
+.glitch::after {
+    left: -2px;
+    text-shadow: 2px 0 #00fff9;
+    clip-path: inset(60% 0 10% 0);
+    animation: 
+        glitch-rgb-2 1.2s infinite linear alternate,
+        glitch-noise 1.5s infinite steps(6) reverse;
+}
+
+/* ==========================================================================
+   SEÇÃO SOBRE (Efeito Estrelas)
+   ========================================================================== */
+.stars-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+#stars,
+#stars2,
+#stars3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    animation: animStar linear infinite;
+}
+#stars { width: 1px; height: 1px; animation-duration: 50s; }
+#stars2 { width: 2px; height: 2px; animation-duration: 100s; }
+#stars3 { width: 3px; height: 3px; animation-duration: 150s; }
+
+.content-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+    align-items: center;
+}
+
+/* ==========================================================================
+   CARDS DE NOTIFICAÇÃO (Para Seção Sobre E Projetos)
+   ========================================================================== */
+.notification {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 70rem;
+    max-width: 90%;
+    min-height: 10rem;
+    background: linear-gradient(45deg, #4377ef, #ff6900, #7e61ff);
+    border-radius: 1rem;
+    padding: 2rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    isolation: isolate;
+}
+.notification::before {
+    content: '';
+    position: absolute;
+    top: -6px; left: -6px; right: -6px; bottom: -6px;
+    background: linear-gradient(45deg, #4377ef, #ff6900, #7e61ff);
+    border-radius: 1.2rem;
+    animation: borderGlow 6s ease-in-out infinite;
+    filter: blur(2px);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: -1;
+}
+.notification:hover::before { opacity: 1; }
+.notification::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px; right: 2px; bottom: 2px;
+    background: #101010;
+    border-radius: 1rem;
+    z-index: -1;
+}
+.notititle {
+    color: #fff;
+    font-weight: 700;
+    font-size: 2rem;
+    padding: 0.65rem 0.25rem 0.4rem 1.25rem;
+    transition: transform 300ms ease;
+    z-index: 5;
+    text-align: left; 
+}
+.notibody {
+    color: #99999d;
+    font-size: 1.3rem;
+    padding: 0 1rem;
+    z-index: 5;
+    line-height: 1.5;
+    text-align: left; 
+}
+.notification:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+}
+.notification:hover .notititle {
+    transform: translateX(5px);
+}
+
+/* ==========================================================================
+   TÍTULO DA SEÇÃO (Para "Projetos", "Contato", etc.)
+   ========================================================================== */
+.section-title {
+    color: #ffffff;
+    text-align: center;
+    margin: 40px 0 30px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding-bottom: 10px;
+}
+
+/* ==========================================================================
+   T20: ESTILOS DO CARROSSEL DE PROJETOS (ANIMAÇÃO INFINITA)
+   ========================================================================== */
+
+/* A seção de Projetos NÃO deve ser 'display: flex' */
+#projetos {
+    display: block; 
+    min-height: auto; 
+}
+
+/* 1. O Wrapper (NOVO): Esconde o conteúdo que transborda */
+.project-carousel-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    overflow: hidden; 
+    margin: 0 auto;
+    padding: 2rem 0; 
+    position: relative;
+    
+    mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        black 10%, 
+        black 90%, 
+        transparent 100%
+    );
+}
+
+/* 2. O Container (MODIFICADO): O container que se move */
+.project-carousel-container {
+    display: flex;
+    width: fit-content; 
+    
+    /* ADICIONADO a animação */
+    animation: scroll-infinite 5s linear infinite;
+}
+
+/* 3. O Card (MODIFICADO): Define a largura dos cards */
+.project-carousel-card {
+    flex: 0 0 auto; 
+    width: 450px; 
+    margin: 0 1rem; 
+}
+
+/* 4. A Animação (@keyframes) */
+@keyframes scroll-infinite {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%); 
+    }
+}
+
+/* 5. UX: Pausa a animação ao passar o mouse */
+.project-carousel-wrapper:hover .project-carousel-container {
+    animation-play-state: paused;
+}
+
+
+/* Estilos dos links e detalhes (Sem alteração) */
+.project-details-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 10px 20px;
+    background-color: #4377ef; 
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: "Audiowide", sans-serif;
+    transition: background-color 0.3s;
+}
+.project-details-link:hover {
+    background-color: #6390ff;
+}
+
+.project-detail-item {
+    padding: 2rem;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border-left: 5px solid #4377ef;
+    text-align: left;
+}
+.project-detail-item h2 {
+    font-family: "Audiowide", sans-serif;
+    color: #4377ef;
+    margin-bottom: 1rem;
+    font-size: 2rem; 
+}
+.project-detail-item p {
+    font-size: 1.1rem;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+.project-links a {
+    margin-right: 1.5rem;
+    font-size: 1.2rem;
+    color: #a0e9ff;
+    text-decoration: none;
+}
+.project-links a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   ANIMAÇÕES (Todas mantidas)
+   ========================================================================== */
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes rotateBorder {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes animStar {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-2000px); }
+}
+@keyframes borderGlow {
+    0%, 100% { background: linear-gradient(45deg, #4377ef, #ff6900, #7e61ff); }
+    50% { background: linear-gradient(45deg, #ff6900, #7e61ff, #4377ef); }
+}
+/* Animações Glitch (Mantidas) */
+@keyframes glitch-flicker {
+    0%, 100% { opacity: 1; } 3% { opacity: 0.9; } 7% { opacity: 0.7; } 12% { opacity: 1; }
+    19% { opacity: 0.8; } 35% { opacity: 1; } 40% { opacity: 0.6; } 60% { opacity: 1; }
+    72% { opacity: 0.85; } 85% { opacity: 0.95; } 90% { opacity: 0.7; } 95% { opacity: 1; }
+}
+@keyframes glitch-skew {
+    0%   { transform: skew(0deg); } 10%  { transform: skew(-2deg); } 20%  { transform: skew(3deg); }
+    30%  { transform: skew(-1deg); } 40%  { transform: skew(2.5deg); } 50%  { transform: skew(-3deg); }
+    60%  { transform: skew(1.5deg); } 70%  { transform: skew(-2.5deg); } 80%  { transform: skew(1deg); }
+    90%  { transform: skew(-1deg); } 100% { transform: skew(0deg); }
+}
+@keyframes glitch-rgb-1 {
+    0%   { clip-path: inset(0 0 100% 0); } 10%  { clip-path: inset(20% 0 70% 0); } 20%  { clip-path: inset(80% 0 10% 0); }
+    30%  { clip-path: inset(10% 0 80% 0); } 40%  { clip-path: inset(60% 0 30% 0); } 50%  { clip-path: inset(30% 0 60% 0); }
+    60%  { clip-path: inset(70% 0 20% 0); } 70%  { clip-path: inset(15% 0 75% 0); } 80%  { clip-path: inset(50% 0 40% 0); }
+    90%  { clip-path: inset(25% 0 65% 0); } 100% { clip-path: inset(0 0 100% 0); }
+}
+@keyframes glitch-rgb-2 {
+    0%   { clip-path: inset(100% 0 0 0); } 15%  { clip-path: inset(70% 0 20% 0); } 25%  { clip-path: inset(10% 0 80% 0); }
+    35%  { clip-path: inset(60% 0 30% 0); } 45%  { clip-path: inset(30% 0 60% 0); } 55%  { clip-path: inset(80% 0 10% 0); }
+    65%  { clip-path: inset(20% 0 70% 0); } 75%  { clip-path: inset(50% 0 40% 0); } 85%  { clip-path: inset(40% 0 50% 0); }
+    95%  { clip-path: inset(75% 0 15% 0); } 100% { clip-path: inset(100% 0 0 0); }
+}
+@keyframes glitch-noise {
+    0%, 100% { background-size: 4px 4px, 4px 4px; }
+    50% { background-size: 2px 2px, 2px 2px; }
+}
+
+/* ==========================================================================
+   ANIMAÇÃO DO TYPEWRITER (T13)
+   ========================================================================== */
+@keyframes blink-caret {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   T22: ESTILOS DO HEADER (Menu)
+   ========================================================================== */
+
+/* Efeito hover para os links do menu */
+nav a[style*="link"]:hover {
+    color: #4377ef !important; 
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (Ajustada)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .notification { width: 90%; }
+    .card-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-text h1 { font-size: 2.8rem; }
+    .hero-text h2 { font-size: 1.6rem; }
+
+    /* Empilha o globo e o diálogo em telas menores */
+    .inlineContainer { 
+      flex-direction: column !important; 
+    }
+    .dialogBox {
+        width: 90% !important;
+        max-width: 450px !important; 
+    }
+
+    .notification { padding: 1.5rem; min-height: 8rem; }
+    .notititle { font-size: 1.6rem; }
+    .notibody { font-size: 1.1rem; }
+    .glitch { font-size: 2.2em; }
+    
+    /* ⭐ BUG 1 CORRIGIDO AQUI (MEDIA QUERY) ⭐ */
+    .project-carousel-card {
+        flex: 0 0 auto; /* Mantém a regra de não encolher */
+        width: 300px; /* Define uma LARGURA FIXA menor */
+        /* (Removido flex-basis: 90% e max-width: 90%) */
+    }
+    .project-detail-item h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Responsividade do Menu */
+    nav {
+        flex-direction: column;
+        height: auto !important;
+        padding: 1rem !important;
+    }
+    .hero-text {
+        margin-top: 80px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 { font-size: 2.2rem; }
+    .hero-text h2 { font-size: 1.2rem; }
+    .notification { width: 95%; padding: 1rem; }
+    .glitch { font-size: 1.8em; letter-spacing: 0.3em; }
+    
+    .card-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    /* ⭐ BUG 1 CORRIGIDO AQUI (MEDIA QUERY) ⭐ */
+    .project-carousel-card {
+        flex: 0 0 auto; /* Mantém a regra de não encolher */
+        width: 280px; /* Define uma LARGURA FIXA ainda menor */
+        /* (Removido flex-basis: 95% e max-width: 95%) */
+    }
+    
+    /* Responsividade do Menu */
+    nav div[style*="links"] {
+        flex-direction: column;
+        gap: 0.5rem !important;
+        align-items: center;
+        margin-top: 10px;
+    }
+}
