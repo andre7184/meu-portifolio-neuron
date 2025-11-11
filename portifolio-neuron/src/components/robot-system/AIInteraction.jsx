@@ -3,133 +3,172 @@ import NeuralGlobe from './NeuralGlobe'; // T14 (Animação)
 import Typewriter from './Typewriter';   // T13 (Digitação)
 import { AI_CONFIG } from '../../data/portfolioData'; // T12 (Dados)
 
+// T28: Função de fetch (movida para fora para clareza)
+async function fetchGreetingData(controller) {
+  try {
+    const response = await fetch(AI_CONFIG.N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error('Falha no N8N');
+    const data = await response.json();
+    if (!data.aiMessage || !data.audioData) throw new Error('JSON mal formatado');
+    return data; // Retorna { aiMessage, audioData }
+  } catch (error) {
+    if (error.name !== 'AbortError') {
+      console.error("Erro no fetch N8N (T28):", error);
+    }
+    // Retorna o fallback se o N8N falhar
+    return { 
+      aiMessage: AI_CONFIG.FALLBACK_MESSAGE, 
+      audioData: null 
+    };
+  }
+}
+
 export default function AIInteraction() {
   
-  const [robotMessage, setRobotMessage] = useState(AI_CONFIG.FALLBACK_MESSAGE);
-  const [isProcessing, setIsProcessing] = useState(false);
+  // T28: Estado para armazenar os dados pré-buscados
+  const [fetchedData, setFetchedData] = useState(null);
   
-  // T29: Ref para o player de áudio e o controlador de requisição
+  // T28: Controla o estado de carregamento do fetch inicial
+  // (Usado para desativar o botão)
+  const [isDataLoading, setIsDataLoading] = useState(true);
+  
+  // T29: Controla se a IA foi ativada pelo clique (mostra o diálogo)
+  const [isIaActive, setIsIaActive] = useState(false);
+  
+  // T14/T29: Controla a animação do globo e o botão "Parar Áudio"
+  const [isPlaying, setIsPlaying] = useState(false);
+  
+  // T13: Mensagem do Typewriter (começa vazia)
+  const [robotMessage, setRobotMessage] = useState(""); 
+  
   const audioRef = useRef(null); 
   const fetchControllerRef = useRef(null); 
 
-  // Limpa a requisição ao desmontar o componente
+  // T28: Requisição automática (silenciosa)
   useEffect(() => {
-    return () => {
-      if (fetchControllerRef.current) {
-        fetchControllerRef.current.abort(); 
-      }
-    };
-  }, []);
-
-  // T28: Lógica de Interação REAL com N8N
-  const handleInteract = async () => {
-    
-    // Cancela qualquer requisição anterior
-    if (fetchControllerRef.current) {
-      fetchControllerRef.current.abort();
-    }
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-
-    setIsProcessing(true);
-    setRobotMessage("Conexão estabelecida. Processando IA no N8N..."); 
-    
     fetchControllerRef.current = new AbortController();
-    const signal = fetchControllerRef.current.signal;
-
-    try {
-      // 1. Chama o Webhook do N8N (T28)
-      const response = await fetch(AI_CONFIG.N8N_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        signal: signal,
+    
+    // 1. Busca os dados
+    fetchGreetingData(fetchControllerRef.current)
+      .then(data => {
+        // T28: Dados recebidos e armazenados!
+        setFetchedData(data);
+        // T28: Libera o botão "Ligar IA"
+        setIsDataLoading(false); 
       });
 
-      if (!response.ok) {
-        throw new Error(`Falha na resposta do N8N: ${response.status}`);
-      }
+    // Limpa o fetch se o usuário sair
+    return () => {
+      if (fetchControllerRef.current) fetchControllerRef.current.abort(); 
+    };
+  }, []); // Array vazio [] = Roda 1 vez na carga
 
-      const data = await response.json();
+  // T29: Clique do usuário em "Ligar IA"
+  const handleLigarIA = () => {
+    if (isDataLoading || isPlaying) return; // Segurança
 
-      // 2. Recebe e decodifica os dados (T29)
-      if (data.aiMessage && data.audioData) {
-        setRobotMessage(data.aiMessage);
-        
-        // T29: Constrói a URI Base64 e toca o áudio
-        const audioSrc = "data:audio/mpeg;base64," + data.audioData;
-        
-        if (audioRef.current) {
-          audioRef.current.src = audioSrc;
-          audioRef.current.play();
-        }
-      } else {
-        throw new Error('Resposta do N8N está mal formatada ou incompleta.');
-      }
-
-    } catch (error) {
-      // Trata a falha e mostra a mensagem de fallback
-      if (error.name !== 'AbortError') {
-        console.error("Erro fatal na integração de IA:", error);
-        setRobotMessage(AI_CONFIG.FALLBACK_MESSAGE);
-      }
-    } finally {
-      setIsProcessing(false); 
-      fetchControllerRef.current = null;
+    setIsIaActive(true); // Mostra o diálogo
+    setIsPlaying(true); // T14: Ativa a animação do globo
+    setRobotMessage(fetchedData.aiMessage); // T13: Inicia o Typewriter
+    
+    // T29: Toca o áudio
+    if (fetchedData.audioData && audioRef.current) {
+      const audioSrc = "data:audio/mpeg;base64," + fetchedData.audioData;
+      audioRef.current.src = audioSrc;
+      audioRef.current.play(); // Permitido pelo clique
     }
   };
 
-  // Botão de Parar (Funciona para parar o fetch e o áudio)
-  const handleStop = () => {
-    if (fetchControllerRef.current) {
-      fetchControllerRef.current.abort(); // Cancela o fetch
-    }
+  // T29: Botão "Parar Áudio"
+  const handleStopAudio = () => {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
-    setIsProcessing(false);
-    setRobotMessage(AI_CONFIG.FALLBACK_MESSAGE); 
+    setIsPlaying(false); // Esconde o botão e para a animação
   };
 
+  // T31: Placeholder
+  const handleFutureInteract = () => {
+    alert("O chatbot (T31) será implementado aqui.");
+  };
+
+  // T29: Quando o áudio (T26) terminar
+  const onAudioEnded = () => {
+    setIsPlaying(false); // Para a animação do globo
+  };
+
+  // --- Renderização ---
   return (
+    // O container inline (globo + diálogo)
     <div style={styles.inlineContainer} className="inlineContainer"> 
       
+      {/* T14: O globo está SEMPRE visível.
+          A animação (isProcessing) é controlada pelo 'isPlaying' */}
       <div style={styles.globeWrapper}>
-        <NeuralGlobe isProcessing={isProcessing} />
+        <NeuralGlobe isProcessing={isPlaying} />
       </div>
 
-      <div style={styles.dialogBox} className="dialogBox">
-        
-        <div style={styles.messageArea}>
-          <Typewriter key={robotMessage} text={robotMessage} />
-        </div>
-        
-        <div style={styles.buttonContainer}>
-          {!isProcessing ? (
+      {/* T29: O diálogo SÓ aparece DEPOIS do clique em "Ligar IA" */}
+      {isIaActive ? (
+        // --- DIÁLOGO ATIVO ---
+        <div style={styles.dialogBox} className="dialogBox">
+          <div style={styles.messageArea}>
+            <Typewriter key={robotMessage} text={robotMessage} />
+          </div>
+          <div style={styles.buttonContainer}>
+            
+            {/* T31: Botão de Interação Futura */}
             <button 
-              onClick={handleInteract} 
+              onClick={handleFutureInteract} 
               style={styles.interactButton}
+              disabled={isPlaying} // Desabilita o chat enquanto o áudio fala
             >
-              Interact
+              Interagir
             </button>
-          ) : (
-            <button 
-              onClick={handleStop}
-              style={styles.stopButton}
-            >
-              Parar
-            </button>
-          )}
+
+            {/* T29: Botão "Parar Áudio" (só aparece se o áudio estiver tocando) */}
+            {isPlaying && (
+              <button onClick={handleStopAudio} style={styles.stopButton}>
+                Parar Áudio
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+      ) : (
+        // --- ESTADO INICIAL (IA DESLIGADA) ---
+        <div style={styles.dialogBox} className="dialogBox">
+          <div style={styles.messageArea}>
+            {/* T28: Mensagem de carregamento ou "Pronto" */}
+            {isDataLoading ? "Inicializando conexão com N8N..." : "IA pronta."}
+          </div>
+          <div style={styles.buttonContainer}>
+            <button 
+              onClick={handleLigarIA} 
+              style={styles.interactButton}
+              // T28: Desativado até os dados chegarem
+              disabled={isDataLoading} 
+            >
+              {isDataLoading ? 'Carregando...' : 'Ligar IA'}
+            </button>
+          </div>
+        </div>
+      )}
       
-      {/* T29: O player de áudio invisível */}
-      <audio ref={audioRef} style={{ display: 'none' }} />
+      {/* T29: Player de áudio (sempre no DOM, mas invisível) */}
+      <audio 
+        ref={audioRef} 
+        style={{ display: 'none' }} 
+        onEnded={onAudioEnded} 
+      />
     </div>
   );
 }
+
 
 // --- ESTILOS (Sem alteração) ---
 const styles = {
@@ -174,6 +213,7 @@ const styles = {
   buttonContainer: {
     display: 'flex',
     justifyContent: 'flex-start',
+    gap: '1rem', 
   },
   interactButton: {
     padding: '10px 20px',
