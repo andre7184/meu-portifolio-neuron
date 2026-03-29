@@ -11,7 +11,7 @@ export const PROJECTS = [
         anchorId: 'detalhe-comissoes',
         title: 'Gestão de Comissões (SaaS)',
         shortDescription: 'Plataforma Multi-Tenant com Spring Boot e React para automação de cálculos e pagamentos.',
-        tags: ['Java', 'Spring Boot', 'React', 'JavaScript', 'Typescript', 'JWT', 'SaaS', 'Docker', 'PostgreSQL', 'DevOps'],
+        tags: ['Java', 'Spring Boot', 'React', 'JavaScript', 'Typescript', 'Tailwind CSS', 'JWT', 'SaaS', 'Docker', 'PostgreSQL', 'DevOps'],
         demoUrl: 'https://comissoes.neurono.com.br',
         images: ['/projects/sistema-comissoes_001.png', '/projects/sistema-comissoes_002.png', '/projects/sistema-comissoes_003.png']
     },
@@ -71,6 +71,16 @@ export const PROJECTS = [
         shortDescription: 'Aplicação de teste com ambiente automatizado de cluster Docker Swarm com 4 nós (1 master, 3 workers) usando Vagrant e VirtualBox.',
         tags: ['Php', 'MySQL', 'Nginx', 'Docker', 'Vagrant', 'Cluster', 'Linux', 'Shell', 'Automação', 'DevOps', 'Git', 'GitHub', 'Docker Swarm', 'Docker Compose'],
         githubUrl: 'https://github.com/andre7184/docker-projeto2-cluster-main'
+    },
+    {
+        id: 'sistema-catalago-produtos',
+        anchorId: 'detalhe-sistema-catalago-produtos',
+        title: 'Sistema Catálogo de Produtos',
+        shortDescription: 'Aplicação Node.js com MongoDB para gerenciamento de catálogo de produtos, incluindo API RESTful e interface de administração.',
+        longDescription: 'Este projeto implementa um sistema completo de catálogo de produtos utilizando Node.js, Express e MongoDB. A aplicação oferece uma API RESTful para operações CRUD, busca textual e filtros dinâmicos. Os dados são populados automaticamente com um script de seed que insere 10.000 produtos com atributos variados (nome, categoria, preço, memória, processador, etc.). O ambiente é totalmente containerizado com Docker e inclui Mongo Express para visualização dos dados. É um exemplo prático de integração entre backend, banco de dados NoSQL e automação com Docker.',
+        tags: ["Node.js", "Express", "MongoDB", "Docker", "API REST", "CRUD", "DevOps", "JavaScript", "Backend", "Mongo Express"
+        ],
+        githubUrl: "https://github.com/andre7184/sistema-catalago-produtos",
     }
 ];
 
