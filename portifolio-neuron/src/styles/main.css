@@ -238,7 +238,7 @@ section {
     padding: 0.65rem 0.25rem 0.4rem 1.25rem;
     transition: transform 300ms ease;
     z-index: 5;
-    text-align: left; 
+    text-align: center; 
 }
 .notibody {
     color: #99999d;

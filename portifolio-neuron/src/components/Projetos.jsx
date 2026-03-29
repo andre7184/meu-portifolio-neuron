@@ -153,12 +153,24 @@ export default function Projetos({ filtro, setFiltro }) {
 
 // --- ESTILOS (Compactos e Popup) ---
 const styles = {
-  section: { padding: '3rem 0', backgroundColor: '#0d0d0d' },
+  section: { 
+    padding: '4rem 0', 
+    backgroundColor: '#0d0d0d',
+    display: 'flex',
+    justifyContent: 'center' 
+  },
+  containerCenter: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center', // Centraliza o título e o botão de limpar
+    width: '100%'
+  },
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-    gap: '1rem',
-    marginTop: '1.5rem'
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 350px))', // Limita o tamanho máximo para não esticar
+    gap: '1.5rem',
+    width: '100%',
+    justifyContent: 'center' // Mágica da centralização dos cards
   },
   miniCard: {
     padding: '1rem',
@@ -171,7 +183,7 @@ const styles = {
   header: { marginBottom: '0.5rem' },
   miniTitle: { fontSize: '1.1rem', color: '#4377ef', paddingBottom: '0.3rem' },
   miniBody: { fontSize: '0.85rem', color: '#bbb', padding: '0', marginBottom: '0.8rem', lineHeight: '1.3' },
-  tags: { display: 'flex', flexWrap: 'wrap', gap: '4px' },
+  tags: { display: 'flex', flexWrap: 'wrap', gap: '4px', justifyContent: 'center'},
   tag: { fontSize: '0.6rem', border: '1px solid rgba(67, 119, 239, 0.4)', padding: '1px 5px', borderRadius: '3px', color: '#4377ef' },
   buttonGroup: { display: 'flex', gap: '8px', marginTop: 'auto' },
   btnAction: {

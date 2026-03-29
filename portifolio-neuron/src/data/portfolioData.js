@@ -12,7 +12,7 @@ export const PROJECTS = [
         title: 'Gestão de Comissões (SaaS)',
         shortDescription: 'Plataforma Multi-Tenant com Spring Boot e React para automação de cálculos e pagamentos.',
         tags: ['Java', 'Spring Boot', 'React', 'JWT', 'SaaS', 'Docker', 'PostgreSQL', 'DevOps'],
-        demoUrl: 'https://demo-comissoes.com',
+        demoUrl: 'https://comissoes.neurono.com.br',
         images: ['/projects/sistema-comissoes_001.jpg', '/projects/sistema-comissoes_002.jpg']
     },
     {
