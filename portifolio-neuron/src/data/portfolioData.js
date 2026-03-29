@@ -13,7 +13,7 @@ export const PROJECTS = [
         shortDescription: 'Plataforma Multi-Tenant com Spring Boot e React para automação de cálculos e pagamentos.',
         tags: ['Java', 'Spring Boot', 'React', 'JWT', 'SaaS', 'Docker', 'PostgreSQL', 'DevOps'],
         demoUrl: 'https://comissoes.neurono.com.br',
-        images: ['/projects/sistema-comissoes_001.jpg', '/projects/sistema-comissoes_002.jpg']
+        images: ['/projects/sistema-comissoes_001.png', '/projects/sistema-comissoes_002.png', '/projects/sistema-comissoes_003.png']
     },
     {
         id: 'whatsapp-bot-go',
@@ -95,5 +95,6 @@ export const SKILLS = {
 export const CONTACT = {
     linkedin: "https://www.linkedin.com/in/andre-m-brandao",
     github: "https://github.com/andre7184",
-    email: "amb7184@gmail.com"
+    email: "amb7184@gmail.com",
+    whatsapp: "5567992020992"
 };

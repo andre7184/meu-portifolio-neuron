@@ -30,7 +30,7 @@ export default function Contato() {
       label: 'WhatsApp',
       value: 'Conectar agora',
       icon: <FaWhatsapp color="#25d366" />,
-      url: "https://wa.me/55679XXXXXXXX" // Adicione seu número aqui
+      url: `https://wa.me/${CONTACT.whatsapp}` // Adicione seu número aqui
     }
   ];
 

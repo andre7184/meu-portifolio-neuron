@@ -5,8 +5,8 @@ export default function Header() {
     <header style={styles.header}>
       <nav style={styles.nav}>
         {/* O Logo (seu nome) aponta para o topo */}
-        <a href="#inicio" style={styles.logo}>
-          André Brandão
+        <a href="#sobre" style={styles.logo}>
+          André Martins Brandão
         </a>
         <div style={styles.links}>
           <a href="#sobre" style={styles.link}>Sobre Mim</a>

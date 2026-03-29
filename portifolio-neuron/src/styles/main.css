@@ -590,3 +590,11 @@ section#projetos button[style*="color: rgb(255, 0, 255)"]:hover {
     color: white;
     box-shadow: 0 0 10px rgba(67, 119, 239, 0.5);
 }
+
+/* Hover para as setas de navegação do popup de projetos */
+section#projetos .backdrop button[title*="Anterior"]:hover,
+section#projetos .backdrop button[title*="Próxima"]:hover {
+    background: #4377ef !important;
+    border-color: #4377ef !important;
+    box-shadow: 0 0 10px #4377ef;
+}
