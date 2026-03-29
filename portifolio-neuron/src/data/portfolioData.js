@@ -11,7 +11,7 @@ export const PROJECTS = [
         anchorId: 'detalhe-comissoes',
         title: 'Gestão de Comissões (SaaS)',
         shortDescription: 'Plataforma Multi-Tenant com Spring Boot e React para automação de cálculos e pagamentos.',
-        tags: ['Java', 'Spring Boot', 'React', 'JWT', 'SaaS', 'Docker', 'PostgreSQL', 'DevOps'],
+        tags: ['Java', 'Spring Boot', 'React', 'JavaScript', 'Typescript', 'JWT', 'SaaS', 'Docker', 'PostgreSQL', 'DevOps'],
         demoUrl: 'https://comissoes.neurono.com.br',
         images: ['/projects/sistema-comissoes_001.png', '/projects/sistema-comissoes_002.png', '/projects/sistema-comissoes_003.png']
     },
@@ -28,7 +28,7 @@ export const PROJECTS = [
         anchorId: 'detalhe-appup',
         title: 'App-UP CG (Mobile)',
         shortDescription: 'Aplicativo multiplataforma para mobilidade urbana e integração com APIs SaaS.',
-        tags: ['React Native', 'Python', 'Mobile', 'Django'],
+        tags: ['React Native', 'Python', 'Mobile', 'Django', 'Typescript'],
         images: ['/projects/app-up-cg_001.jpg', '/projects/app-up-cg_002.jpg']
     },
     {
@@ -55,6 +55,22 @@ export const PROJECTS = [
         tags: ['Flutter', 'Dart', 'Mobile', 'SQLite', 'Android', 'iOS', 'API REST'],
         githubUrl: 'https://github.com/andre7184/AppFluter',
         images: ['/projects/app-flutter-tasks_001.jpg', '/projects/app-flutter-tasks_002.jpg', '/projects/app-flutter-tasks_003.jpg']
+    },
+    {
+        id: 'digicoin-django',
+        anchorId: 'detalhe-django',
+        title: 'DigiCoin (Django)',
+        shortDescription: 'Sistema web para controle de moeda virtual, com intuito de promover insentivo de colaboradores para a realização de tarefas.',
+        tags: ['Python', 'Django', 'MySQL', 'Docker', 'DevOps', 'Linux', 'API REST', 'Git', 'GitHub', 'Scrum', 'Kanban', 'Html', 'CSS', 'JavaScript'],
+        images: ['/projects/digicoin_000.png','/projects/digicoin_001.png', '/projects/digicoin_002.png', '/projects/digicoin_003.png', '/projects/digicoin_004.png', '/projects/digicoin_005.png']
+    },
+    {
+        id: 'docker-cluster',
+        anchorId: 'detalhe-docker-cluster',
+        title: 'Docker Cluster com Vagrant e Swarm',
+        shortDescription: 'Aplicação de teste com ambiente automatizado de cluster Docker Swarm com 4 nós (1 master, 3 workers) usando Vagrant e VirtualBox.',
+        tags: ['Php', 'MySQL', 'Nginx', 'Docker', 'Vagrant', 'Cluster', 'Linux', 'Shell', 'Automação', 'DevOps', 'Git', 'GitHub', 'Docker Swarm', 'Docker Compose'],
+        githubUrl: 'https://github.com/andre7184/docker-projeto2-cluster-main'
     }
 ];
 
