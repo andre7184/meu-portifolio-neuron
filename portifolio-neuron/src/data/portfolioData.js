@@ -4,41 +4,92 @@
  * ===============================================
  */
 
-// 1. CONFIGURAÇÃO DA IA E AUTOMAÇÃO (Sem alteração)
-export const AI_CONFIG = {
-    N8N_WEBHOOK_URL: "https://n8n.promptweb.com.br/webhook/fe465265-1bd3-4e19-9391-bcbc8fc053d8",
-    KEY_SKILLS: "Java, Spring Boot, Python, DevOps, N8N, e soluções de IA.",
-    FALLBACK_MESSAGE: "Olá! Seja bem-vindo ao meu portfólio. Aqui demonstro soluções em Java, Python e automação inteligente."
-};
-
-// 2. DADOS DOS PROJETOS (MODIFICADO)
+// 1. DADOS DOS PROJETOS (MODIFICADO)
 export const PROJECTS = [
     {
-        id: 'ia-robot-portfolio',
-        // 1. ID da Âncora (para o link do carrossel)
-        anchorId: 'detalhe-ia-robot', 
-        title: 'Robô de IA para PortfólIO (Este Projeto!)',
-        // 2. Descrição Curta (para o carrossel)
-        shortDescription: 'Um assistente de IA que usa N8N e Gemini para criar uma saudação personalizada.',
-        // 3. Descrição Longa (para a seção de detalhes)
-        longDescription: 'Este projeto demonstra a integração de um front-end React com um back-end de automação (N8N) e uma API de IA (Gemini). O robô identifica a geolocalização do visitante para fornecer uma saudação única, mostrando habilidades em automação full-stack.',
-        tags: ['React', 'N8N', 'Gemini API', 'Automação', 'SVG'],
-        // 4. Links de Saída
-        githubLink: 'https://github.com/seu-usuario/portifolio-neuron',
-        liveLink: null // (O próprio site)
+        id: 'sistema-comissoes',
+        anchorId: 'detalhe-comissoes',
+        title: 'Gestão de Comissões (SaaS)',
+        shortDescription: 'Plataforma Multi-Tenant com Spring Boot e React para automação de cálculos e pagamentos.',
+        tags: ['Java', 'Spring Boot', 'React', 'JWT', 'SaaS', 'Docker', 'PostgreSQL', 'DevOps'],
+        demoUrl: 'https://demo-comissoes.com',
+        images: ['/projects/sistema-comissoes_001.jpg', '/projects/sistema-comissoes_002.jpg']
     },
     {
-        id: 'generic-project-1',
-        anchorId: 'detalhe-saas',
-        title: 'Projeto Full Stack (Ex: SaaS)',
-        shortDescription: 'Plataforma full-stack para gerenciamento de X, construída com Java/Spring Boot e React.',
-        longDescription: 'Uma descrição muito mais detalhada do projeto SaaS, explicando a arquitetura, os desafios enfrentados e as soluções implementadas utilizando Java e React.',
-        tags: ['Java', 'Spring Boot', 'React', 'SaaS'],
-        githubLink: 'https://github.com/seu-usuario/projeto-saas',
-        liveLink: 'https://meu-saas.com'
+        id: 'whatsapp-bot-go',
+        anchorId: 'detalhe-bot',
+        title: 'WhatsApp Bot (Go)',
+        shortDescription: 'Bot integrado à WhatsApp Cloud API com processamento via Webhook e IA.',
+        tags: ['Go', 'Cloud API', 'Webhooks', 'IA', 'Token JWT', 'Docker', 'DevOps'],
+        githubUrl: 'https://github.com/andre7184/whatsapp-bot'
     },
-    // Adicione mais projetos...
+    {
+        id: 'app-up-cg',
+        anchorId: 'detalhe-appup',
+        title: 'App-UP CG (Mobile)',
+        shortDescription: 'Aplicativo multiplataforma para mobilidade urbana e integração com APIs SaaS.',
+        tags: ['React Native', 'Python', 'Mobile', 'Django'],
+        images: ['/projects/app-up-cg_001.jpg', '/projects/app-up-cg_002.jpg']
+    },
+    {
+        id: 'infra-traefik',
+        anchorId: 'detalhe-traefik',
+        title: 'Deploy com Traefik',
+        shortDescription: 'Infraestrutura automatizada com Docker Compose e certificados SSL automáticos.',
+        tags: ['Docker', 'Traefik', 'DevOps', 'SSL', 'Linux'],
+        githubUrl: 'https://github.com/andre7184/deploy-com-traefik'
+    },
+    {
+        id: 'neurono-ia',
+        anchorId: 'detalhe-neurono',
+        title: 'Neurono (Orquestrador IA)',
+        shortDescription: 'Plataforma para gerenciamento dinâmico de múltiplos modelos de Inteligência Artificial.',
+        tags: ['Python', 'Cloud API', 'Go', 'IA', 'SaaS', 'Linux', 'Docker', 'DevOps'],
+        images: ['/projects/neurono-ia_001.jpg', '/projects/neurono-ia_002.jpg', '/projects/neurono-ia_003.jpg', '/projects/neurono-ia_004.jpg', '/projects/neurono-ia_005.jpg']
+    },
+    {
+        id: 'app-flutter-tasks',
+        anchorId: 'detalhe-flutter',
+        title: 'AppFlutter',
+        shortDescription: 'Gerenciamento de tarefas com persistência local e interface responsiva.',
+        tags: ['Flutter', 'Dart', 'Mobile', 'SQLite', 'Android', 'iOS', 'API REST'],
+        githubUrl: 'https://github.com/andre7184/AppFluter',
+        images: ['/projects/app-flutter-tasks_001.jpg', '/projects/app-flutter-tasks_002.jpg', '/projects/app-flutter-tasks_003.jpg']
+    }
 ];
+
+// 2. HABILIDADES (MODIFICADO)
+export const SKILLS = {
+    backend: [
+        { name: 'Java', icon: 'FaJava', color: '#ed8b00' },
+        { name: 'Go', icon: 'SiGo', color: '#00add8' },
+        { name: 'PHP', icon: 'SiPhp', color: '#3776ab' },
+        { name: 'Python', icon: 'SiPython', color: '#3776ab' },
+        { name: 'Node.js', icon: 'SiNodedotjs', color: '#f7df1e' },
+        { name: 'PostgreSQL', icon: 'SiPostgresql', color: '#336791' },
+        { name: 'MySQL', icon: 'SiMysql', color: '#336791' },
+        { name: 'MongoDB', icon: 'SiMongodb', color: '#336791' },
+        { name: 'Django', icon: 'SiDjango', color: '#3776ab' },
+        { name: 'Spring Boot', icon: 'SiSpringboot', color: '#6db33f' },
+    ],
+    frontend: [
+        { name: 'JavaScript', icon: 'SiJavascript', color: '#f7df1e' },
+        { name: 'TypeScript', icon: 'SiTypescript', color: '#3178c6' },
+        { name: 'React', icon: 'SiReact', color: '#61DAFB' },
+        { name: 'React Native', icon: 'SiReact', color: '#099453' },
+        { name: 'Flutter', icon: 'SiFlutter', color: '#38B2AC' },
+        { name: 'CSS', icon: 'SiCss', color: '#38B2AC' },
+        { name: 'HTML', icon: 'SiHtml5', color: '#38B2AC' },
+        { name: 'Tailwind CSS', icon: 'SiTailwindcss', color: '#38B2AC' }
+    ],
+    devops: [
+        { name: 'Docker', icon: 'SiDocker', color: '#2496ed' },
+        { name: 'Kubernetes', icon: 'SiKubernetes', color: '#2496ed' },
+        { name: 'Git', icon: 'FaGitAlt', color: '#f05032' },
+        { name: 'GitHub', icon: 'SiGithub', color: '#f05032' },
+        { name: 'Linux', icon: 'FaLinux', color: '#ffffff' }
+    ]
+};
 
 // 3. DADOS DE CONTATO (Sem alteração)
 export const CONTACT = {

@@ -9,7 +9,6 @@ export default function Header() {
           André Brandão
         </a>
         <div style={styles.links}>
-          <a href="#inicio" style={styles.link}>Inicio</a>
           <a href="#sobre" style={styles.link}>Sobre Mim</a>
           <a href="#habilidades" style={styles.link}>Habilidades</a>
           <a href="#projetos" style={styles.link}>Projetos</a>
@@ -51,7 +50,7 @@ const styles = {
     gap: '1.5rem',
   },
   link: {
-    color: '#ccc',
+    //color: '#ccc',
     textDecoration: 'none',
     fontSize: '1rem',
     fontFamily: '"Quantico", sans-serif',

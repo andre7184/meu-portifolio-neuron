@@ -1,34 +1,30 @@
-import React from 'react';
-import './styles/main.css'; 
-
-// Componentes de Layout
-import Header from './components/layout/Header'; // T21 (NOVO)
-
-// Seções da Página
-import Inicio from './components/Inicio';
+import React, { useState } from 'react';
+import Header from './components/layout/Header';
 import Sobre from './components/Sobre';
-import Habilidades from './components/Habilidades'; // T23 (NOVO)
+import Habilidades from './components/Habilidades';
 import Projetos from './components/Projetos';
-import ProjetoDetalhe from './components/ProjetoDetalhe'; 
 import Contato from './components/Contato';
+import './styles/main.css';
 
-// (O SenacGlitch foi removido como solicitado)
+function App() {
+  // Estado para armazenar a tag selecionada nas Habilidades
+  const [filtro, setFiltro] = useState(null);
 
-export default function App() {
   return (
     <div className="App">
-      
-      {/* O Menu Fixo no Topo */}
-      <Header /> 
-      
-      {/* O conteúdo da página */}
-      <Inicio /> 
-      <Sobre />
-      <Habilidades />
-      <Projetos />
-      <ProjetoDetalhe />
-      <Contato />
-
+      <Header />
+      <main>
+        <Sobre />
+        {/* Passamos a função setFiltro para as habilidades */}
+        <Habilidades setFiltro={setFiltro} />
+        
+        {/* Passamos o filtro atual e a função para limpar para os projetos */}
+        <Projetos filtro={filtro} setFiltro={setFiltro} />
+        
+        <Contato />
+      </main>
     </div>
   );
 }
+
+export default App;

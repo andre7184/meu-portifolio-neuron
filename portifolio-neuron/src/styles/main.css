@@ -519,3 +519,74 @@ nav a[style*="link"]:hover {
         margin-top: 10px;
     }
 }
+
+/* ==========================================================================
+   CORREÇÃO DO HOVER DO MENU (HEADER)
+   ========================================================================== */
+
+/* 1. Define a cor base para todos os links dentro do nav */
+nav a {
+    color: #ccc !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none;
+}
+
+/* 2. Aplica o efeito quando o mouse passa por cima */
+nav a:hover {
+    color: #4377ef !important; /* Cor azul neon */
+    text-shadow: 0 0 10px rgba(67, 119, 239, 0.7); /* Efeito de brilho */
+    transform: translateY(-2px); /* Leve movimento para cima */
+}
+
+/* ==========================================================================
+   HOVER NOS BOTÕES DE PROJETOS
+   ========================================================================== */
+
+/* 1. Estilo base para todos os botões de ação nos cards */
+.project-details-link, 
+section#projetos a, 
+section#projetos button {
+    transition: all 0.3s ease !important;
+}
+
+/* 2. Efeito Hover Geral (Azul) */
+section#projetos a:hover, 
+section#projetos button:hover {
+    background-color: #4377ef !important;
+    color: white !important;
+    box-shadow: 0 0 15px rgba(67, 119, 239, 0.5);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+/* 3. Efeito Específico para botões com bordas coloridas (Demo/Fotos) */
+section#projetos a[style*="color: rgb(0, 255, 204)"]:hover {
+    background-color: #00ffcc !important;
+    color: #000 !important;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+}
+
+section#projetos button[style*="color: rgb(255, 0, 255)"]:hover {
+    background-color: #ff00ff !important;
+    color: #fff !important;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+}
+
+.btn-skill-filter {
+    background: transparent;
+    border: 1px solid rgba(67, 119, 239, 0.4);
+    color: #4377ef;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Quantico', sans-serif;
+    margin-left: 10px;
+}
+
+.btn-skill-filter:hover {
+    background: #4377ef;
+    color: white;
+    box-shadow: 0 0 10px rgba(67, 119, 239, 0.5);
+}
