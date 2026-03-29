@@ -1,0 +1,32 @@
+name: Deploy Portfolio
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: deployer
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            # Navega para a estrutura de pastas definida
+            mkdir -p ~/promptweb.com.br/portfolio && cd ~/promptweb.com.br/portfolio
+            
+            if [ -d ".git" ]; then
+              git pull origin main
+            else
+              git clone https://github.com/andre7184/seu-repositorio.git .
+            fi
+            
+            # Build e restart do container
+            docker-compose up -d --build
+            docker image prune -f
